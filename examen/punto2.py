@@ -88,11 +88,14 @@ def year1960(sh):
 
 # Modifica Vlack Widow por Black widow
 def modify(sh):
-    personaje = sh.delete("Vlack Widow", "supername")
+    sh.order_by("supername", False)
+    pos = sh.search("Vlack Widow", "supername")
+    personaje = sh.get_element_by_index(int(pos))
     print("____ Personaje sin modificar ____")
     print(personaje)
     personaje.supername = "Black Widow"
     sh.insert(personaje, "supername")
+    sh.order_by("supername", False)
     index = sh.search("Black Widow", "supername")
     personaje = sh.get_element_by_index(index)
     print("____ Personaje Modificado ____")
@@ -116,7 +119,6 @@ def agregar(sh, sh_aux):
             personaje = sh.get_element_by_index(i)
             if personaje_aux.supername == personaje.supername:
                 coincide == True
-                print("Entro aca")
         if coincide == False:
             sh.insert(personaje_aux, "supername")
 
